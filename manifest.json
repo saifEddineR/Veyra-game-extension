@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "DemonicScans Quick Navigation",
+  "version": "1.0",
+  "description": "Sticky navigation buttons for DemonicScans",
+  "content_scripts": [
+    {
+      "matches": ["https://demonicscans.org/*"],
+      "js": ["helper.js", "content.js"],
+      "css": ["style.css"]
+    }
+  ]
+}

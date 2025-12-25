@@ -1,0 +1,101 @@
+/* MAIN NAV BAR */
+#demonic-nav {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  /* ⬇️ Lower side of the screen */
+  bottom: 0;
+  top: auto;
+  z-index: 9999;
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 8px;
+  border-radius: 10px;
+
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* COLLAPSED STATE */
+#demonic-nav.collapsed {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* BUTTONS */
+#demonic-nav button {
+  background: #0f101ece;
+  color: white;
+  border: none;
+
+  /* ⬇️ More compact buttons */
+  padding: 4px 6px;
+
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+#demonic-nav button:hover {
+  background: #7a7a7ace;
+}
+
+/* REDUCE BUTTON */
+.reduce-btn {
+  background: rgba(255, 255, 255, 0.15);
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+/* FLOATING TOGGLE BUTTON (when collapsed) */
+#demonic-toggle {
+  position: fixed;
+
+  /* ⬇️ Middle bottom of screen */
+  left: 50%;
+  bottom: 5px;
+  top: auto;
+  transform: translateX(-50%);
+
+  z-index: 9999;
+
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#demonic-toggle:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* attack x3 button monster-card */
+.attack-x3-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+
+  background: rgba(255, 32, 86, 0.9);
+  color: white;
+  border: none;
+  border-radius: 6px;
+
+  padding: 4px 6px;
+  font-size: 12px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.attack-x3-btn:hover {
+  background: rgba(255, 32, 86, 1);
+}
