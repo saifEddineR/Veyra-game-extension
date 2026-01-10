@@ -6,7 +6,13 @@
   "content_scripts": [
     {
       "matches": ["https://demonicscans.org/*"],
-      "js": ["helper.js", "content.js"],
+      "js": [
+        "helper.js",
+        "APIcalls.js",
+        "updateContent.js",
+        "newContent.js",
+        "content.js"
+      ],
       "css": ["style.css"]
     }
   ]

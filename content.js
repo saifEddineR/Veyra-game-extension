@@ -1,5 +1,6 @@
 // Prevent duplicate injection
 if (!document.getElementById("demonic-nav")) {
+  window.DemonicHelper.getCurrentUsername();
   const nav = document.createElement("div");
   nav.id = "demonic-nav";
 
@@ -13,7 +14,7 @@ if (!document.getElementById("demonic-nav")) {
     { name: "🏠", url: "/game_dash.php" },
     { name: "🗡️1", url: "/active_wave.php?gate=3&wave=3" },
     { name: "🗡️2", url: "/active_wave.php?gate=3&wave=5" },
-    { name: "🎄", url: "/active_wave.php?event=4&wave=2" },
+    { name: "⚔️", url: "/pvp.php" },
     { name: "⚒️", url: "/blacksmith.php" },
     { name: "🏰", url: "guild_dungeon.php" },
     { name: "🛡️", url: "/adventurers_guild.php" },
@@ -30,19 +31,6 @@ if (!document.getElementById("demonic-nav")) {
     btn.onclick = () => (window.location.href = link.url);
     nav.appendChild(btn);
   });
-
-  /* ───── ATTACK BUTTONS ───── */
-
-  const hit3Btn = document.createElement("button");
-  hit3Btn.textContent = "👊 ×3";
-  hit3Btn.onclick = () => joinAndAttack({ hits: 3 });
-
-  const hit5Btn = document.createElement("button");
-  hit5Btn.textContent = "👊 ×5";
-  hit5Btn.onclick = () => joinAndAttack({ hits: 5 });
-
-  nav.appendChild(hit3Btn);
-  nav.appendChild(hit5Btn);
 
   /* ───── REDUCE BUTTON ───── */
 
@@ -65,35 +53,21 @@ if (!document.getElementById("demonic-nav")) {
   document.body.appendChild(toggleBtn);
 }
 
-// x3 button for monster-card
+/* ───── MONSTER CARD ×3 BUTTON ───── */
+
 if (window.location.pathname.includes("active_wave")) {
-  injectMonsterCardButtons();
+  window.newContent.injectMonsterCardButtons();
+  // repeat every 3 seconds
+  setInterval(async () => {
+    await window.updateContent.updateActiveWaveContent();
+    window.newContent.injectMonsterCardButtons();
+  }, 2000);
 }
 
-function injectMonsterCardButtons() {
-  const cards = document.querySelectorAll(".monster-card[data-monster-id]");
-  if (!cards.length) return;
+if (window.location.pathname.includes("/guild_dungeon_location.php")) {
+  window.newContent.injectGuildDungeonLootIcons();
+}
 
-  cards.forEach((card) => {
-    if (card.querySelector(".attack-x3-btn")) return;
-
-    const monsterId = card.getAttribute("data-monster-id");
-
-    // Ensure card positioning
-    card.style.position = "relative";
-
-    const btn = document.createElement("button");
-    btn.textContent = "×3";
-    btn.className = "attack-x3-btn";
-
-    btn.onclick = (e) => {
-      e.stopPropagation();
-      joinAndAttackById({
-        monsterId,
-        hits: 3,
-      });
-    };
-
-    card.appendChild(btn);
-  });
+if (window.location.pathname.includes("/battle.php")) {
+  window.newContent.dmgMobButton();
 }
