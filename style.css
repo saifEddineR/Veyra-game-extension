@@ -79,8 +79,8 @@
   background: rgba(0, 0, 0, 0.8);
 }
 
-/* attack x3 button monster-card */
-.attack-x3-btn {
+/* attack x2 button monster-card */
+.attack-x2-btn {
   position: absolute;
   top: 6px;
   right: 6px;
@@ -112,7 +112,7 @@
   z-index: 10;
 }
 
-.attack-x3-btn:hover,
+.attack-x2-btn:hover,
 .attack-x1-btn:hover {
   background: rgba(255, 32, 86, 1);
 }

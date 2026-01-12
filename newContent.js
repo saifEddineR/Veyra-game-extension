@@ -16,7 +16,7 @@ window.newContent.injectMonsterCardButtons = async function () {
      *  ============================ */
     if (isDead) {
       // Remove attack button if exists
-      card.querySelector(".attack-x3-btn")?.remove();
+      card.querySelector(".attack-x2-btn")?.remove();
       card.querySelector(".join-battle-btn")?.remove();
 
       if (!card.querySelector(".loot-btn")) {
@@ -44,15 +44,15 @@ window.newContent.injectMonsterCardButtons = async function () {
     card.querySelector(".loot-btn")?.remove();
 
     /* ───── ATTACK ×3 BUTTON ───── */
-    if (!card.querySelector(".attack-x3-btn")) {
+    if (!card.querySelector(".attack-x2-btn")) {
       const attackBtn = document.createElement("button");
-      attackBtn.textContent = "×3";
-      attackBtn.className = "attack-x3-btn";
+      attackBtn.textContent = "×2";
+      attackBtn.className = "attack-x2-btn";
 
       attackBtn.onclick = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        DemonicHelper.attackFromCard(monsterId, 3);
+        DemonicHelper.attackFromCard(monsterId, 2);
       };
 
       card.appendChild(attackBtn);
