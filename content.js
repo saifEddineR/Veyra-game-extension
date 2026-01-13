@@ -14,6 +14,7 @@ if (!document.getElementById("demonic-nav")) {
     { name: "🏠", url: "/game_dash.php" },
     { name: "🗡️1", url: "/active_wave.php?gate=3&wave=3" },
     { name: "🗡️2", url: "/active_wave.php?gate=3&wave=5" },
+    { name: "🗡️3", url: "/active_wave.php?gate=3&wave=8" },
     { name: "⚔️", url: "/pvp.php" },
     { name: "⚒️", url: "/blacksmith.php" },
     { name: "🏰", url: "guild_dungeon.php" },
@@ -22,7 +23,9 @@ if (!document.getElementById("demonic-nav")) {
     { name: "🛒", url: "/merchant.php" },
     { name: "🎒", url: "/inventory.php" },
     { name: "📊", url: "/stats.php" },
+    { name: "📚", url: "/collections.php" },
     { name: "🏆", url: "/achievements.php" },
+    { name: "🎟️", url: "/battle_pass.php" },
   ];
 
   links.forEach((link) => {
