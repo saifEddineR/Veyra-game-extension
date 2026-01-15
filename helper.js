@@ -5,6 +5,29 @@ function getMonsterIdFromUrl() {
   return params.get("id");
 }
 
+function getBattleParamsFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+
+  // Normal monster battle
+  if (params.has("id")) {
+    return {
+      type: "monster",
+      monster_id: params.get("id"),
+    };
+  }
+
+  // Dungeon / guild battle
+  if (params.has("dgmid") && params.has("instance_id")) {
+    return {
+      type: "dungeon",
+      dgmid: params.get("dgmid"),
+      instance_id: params.get("instance_id"),
+    };
+  }
+
+  return null;
+}
+
 /* ───── NETWORK ───── */
 
 async function joinBattle(monsterId, userId) {
@@ -33,18 +56,36 @@ async function joinBattle(monsterId, userId) {
   return { success, text };
 }
 
-async function sendDamageRequest(monsterId, skillId = 0, staminaCost = 1) {
+async function sendDamageRequest(skillId = 0, staminaCost = 1, monsterId) {
+  const battle = getBattleParamsFromUrl();
+
+  if (!battle && monsterId === undefined) {
+    console.warn("No valid battle params in URL");
+    return;
+  }
+
+  const body = new URLSearchParams({
+    skill_id: skillId,
+    stamina_cost: staminaCost,
+  });
+
+  // Attach correct identifiers
+  if (monsterId) {
+    body.set("monster_id", monsterId);
+  } else if (battle.type === "monster") {
+    body.set("monster_id", battle.monster_id);
+  } else if (battle.type === "dungeon") {
+    body.set("dgmid", battle.dgmid);
+    body.set("instance_id", battle.instance_id);
+  }
+
   return fetch("https://demonicscans.org/damage.php", {
     method: "POST",
     credentials: "include",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: new URLSearchParams({
-      monster_id: monsterId,
-      skill_id: skillId,
-      stamina_cost: staminaCost,
-    }),
+    body,
   });
 }
 
@@ -69,7 +110,7 @@ async function joinAndAttackById({ monsterId, hits = 3 }) {
   }
 
   for (let i = 0; i < hits; i++) {
-    await sendDamageRequest(monsterId);
+    await sendDamageRequest(0, 1, monsterId);
   }
 
   //window.location.reload();
@@ -148,13 +189,8 @@ function extractDungeonParams(monElement) {
 
 window.DemonicHelper = {
   attackFromUrl(hits, skillId = 0, staminaCost = 1) {
-    const monsterId = getMonsterIdFromUrl();
-    if (!monsterId) {
-      console.warn("No monster ID in URL");
-      return;
-    }
     for (let i = 0; i < hits; i++) {
-      sendDamageRequest(monsterId, skillId, staminaCost);
+      sendDamageRequest(skillId, staminaCost);
     }
   },
   attackFromCard(monsterId, hits) {

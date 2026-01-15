@@ -184,10 +184,10 @@ window.newContent.dmgMobButton = function () {
   const dmgBtns = document.querySelector(".battle-actions-buttons");
   const newDiv = document.createElement("div");
 
-  const hitx80Btn = document.createElement("button");
-  hitx80Btn.textContent = "👊 ×80";
-  hitx80Btn.onclick = () => DemonicHelper.attackFromUrl(8, -1, 10);
-  newDiv.appendChild(hitx80Btn);
+  const hitx70Btn = document.createElement("button");
+  hitx70Btn.textContent = "👊 ×70";
+  hitx70Btn.onclick = () => DemonicHelper.attackFromUrl(7, -1, 10);
+  newDiv.appendChild(hitx70Btn);
 
   const hitx30Btn = document.createElement("button");
   hitx30Btn.textContent = "👊 ×30";
