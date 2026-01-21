@@ -15,6 +15,7 @@ if (!document.getElementById("demonic-nav")) {
     { name: "🗡️1", url: "/active_wave.php?gate=3&wave=3" },
     { name: "🗡️2", url: "/active_wave.php?gate=3&wave=5" },
     { name: "🗡️3", url: "/active_wave.php?gate=3&wave=8" },
+    { name: "🐀", url: "/active_wave.php?event=6&wave=3" },
     { name: "⚔️", url: "/pvp.php" },
     { name: "⚒️", url: "/blacksmith.php" },
     { name: "🏰", url: "guild_dungeon.php" },
